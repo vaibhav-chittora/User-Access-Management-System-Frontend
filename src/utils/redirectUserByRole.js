@@ -1,15 +1,19 @@
+// export const redirectUserByRole = (role, navigate) => {
+//   switch (role) {
+//     case "admin":
+//       navigate("/create-software");
+//       break;
+//     case "employee":
+//       navigate("/request-access");
+//       break;
+//     case "manager":
+//       navigate("/pending-requests");
+//       break;
+//     default:
+//       navigate("/unauthorized");
+//   }
+// };
+
 export const redirectUserByRole = (role, navigate) => {
-  switch (role) {
-    case "Admin":
-      navigate("/create-software");
-      break;
-    case "Employee":
-      navigate("/request-access");
-      break;
-    case "Manager":
-      navigate("/pending-requests");
-      break;
-    default:
-      navigate("/home");
-  }
+  navigate("/home"); // Redirect to common dashboard for all roles
 };

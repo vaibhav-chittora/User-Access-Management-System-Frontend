@@ -1,14 +1,15 @@
 import { useState } from "react";
 import axiosInstance from "../api/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import toast from "react-hot-toast";
+import { useAuth } from "../context/AuthContext";
 
 export default function CreateSoftware() {
     const [name, setName] = useState("");
     const [description, setDescription] = useState("");
     const [accessLevels, setAccessLevels] = useState([]);
-    const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
     const navigate = useNavigate();
+    const { role } = useAuth()
 
     const levelOptions = ["Read", "Write", "Admin"];
 
@@ -22,32 +23,30 @@ export default function CreateSoftware() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        setError("");
-        setSuccess("");
 
         if (!name || !description || accessLevels.length === 0) {
-            return setError("All fields are required.");
+            toast.error("All fields are required.");
+            return;
         }
-
         try {
-            await axiosInstance.post("/software", {
+            await axiosInstance.post("/software/", {
                 name,
                 description,
                 accessLevels,
-            });
-            setSuccess("Software created successfully!");
-            setTimeout(() => navigate("/"), 1500);
+            },);
+            console.log("Users role in creating software",);
+
+            toast.success("Software created successfully!");
+            navigate("/home");
         } catch (err) {
-            setError("Error creating software.");
+            const errorMessage = err.response?.data?.message || "Failed to create software.";
+            toast.error(errorMessage);
         }
     };
 
     return (
         <div className="max-w-xl mx-auto mt-10 p-6 bg-white shadow rounded">
             <h2 className="text-2xl font-bold mb-4">Create New Software</h2>
-
-            {error && <p className="text-red-600 mb-2">{error}</p>}
-            {success && <p className="text-green-600 mb-2">{success}</p>}
 
             <form onSubmit={handleSubmit} className="space-y-4">
                 <div>

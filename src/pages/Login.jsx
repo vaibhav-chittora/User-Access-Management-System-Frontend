@@ -1,11 +1,12 @@
 import { useState } from "react";
-import axiosInstance from "../api/axiosInstance";
 import { useNavigate, Link } from "react-router-dom";
-import { redirectUserByRole } from "../utils/redirectUserByRole";
+import axiosInstance from "../api/axiosInstance";
+import { useAuth } from "../context/AuthContext";
+import toast from "react-hot-toast";
 
 export default function Login() {
     const [formData, setFormData] = useState({ username: "", password: "" });
-    const [error, setError] = useState("");
+    const { login } = useAuth();
     const navigate = useNavigate();
 
     const handleChange = (e) => {
@@ -16,28 +17,40 @@ export default function Login() {
         e.preventDefault();
         try {
             const res = await axiosInstance.post("/auth/login", formData);
-            const { token, role, username } = res.data;
+            const { token, username, role } = res.data.data;
 
-            localStorage.setItem("token", token);
-            localStorage.setItem("role", role);
-            localStorage.setItem("username", username);
+            login(token, username, role);
+            toast.success("Login successful");
 
-            redirectUserByRole(role, navigate);
+            navigate("/home");
         } catch (err) {
-            setError("Login failed: " + err.response?.data?.message || "Server error");
+            toast.error(err.response?.data?.message || "Login failed");
         }
     };
 
     return (
-        <div className="flex flex-col items-center justify-center h-screen">
-            <h2 className="text-2xl font-bold mb-4">Login</h2>
-            <form onSubmit={handleSubmit} className="flex flex-col gap-4 w-80">
-                <input name="username" onChange={handleChange} placeholder="Username" className="p-2 border rounded" />
-                <input name="password" type="password" onChange={handleChange} placeholder="Password" className="p-2 border rounded" />
-                {error && <p className="text-red-500">{error}</p>}
-                <button className="bg-blue-500 text-white p-2 rounded">Login</button>
-                <p className="text-center">
-                    Don't have an account? <Link to="/signup" className="text-blue-600 underline">Sign Up</Link>
+        <div className="min-h-screen flex flex-col items-center justify-center">
+            <h1 className="text-3xl font-bold mb-6">Login</h1>
+            <form onSubmit={handleSubmit} className="w-80 flex flex-col gap-4">
+                <input
+                    name="username"
+                    onChange={handleChange}
+                    placeholder="Username"
+                    className="p-2 border rounded"
+                />
+                <input
+                    type="password"
+                    name="password"
+                    onChange={handleChange}
+                    placeholder="Password"
+                    className="p-2 border rounded"
+                />
+                <button className="bg-blue-500 text-white py-2 rounded">Login</button>
+                <p className="text-center text-sm">
+                    Don’t have an account?{" "}
+                    <Link to="/signup" className="text-blue-600 underline">
+                        Sign up
+                    </Link>
                 </p>
             </form>
         </div>

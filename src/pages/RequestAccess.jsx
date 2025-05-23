@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axiosInstance from "../api/axiosInstance";
+import toast from "react-hot-toast";
 
 export default function RequestAccess() {
     const [softwares, setSoftwares] = useState([]);
@@ -8,8 +9,6 @@ export default function RequestAccess() {
         accessType: "Read",
         reason: "",
     });
-    const [message, setMessage] = useState("");
-    const [error, setError] = useState("");
 
     useEffect(() => {
         const fetchSoftwares = async () => {
@@ -17,7 +16,7 @@ export default function RequestAccess() {
                 const res = await axiosInstance.get("/software");
                 setSoftwares(res.data.data);
             } catch (err) {
-                setError("Failed to load software list.");
+                toast.error("Failed to load software list.");
             }
         };
         fetchSoftwares();
@@ -29,14 +28,17 @@ export default function RequestAccess() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+        if (!formData.software || !formData.reason) {
+            toast.error("All fields are required.");
+            return;
+        }
+
         try {
-            setMessage("");
-            setError("");
             await axiosInstance.post("/requests", formData);
-            setMessage("Request submitted successfully.");
+            toast.success("Request submitted successfully.");
             setFormData({ software: "", accessType: "Read", reason: "" });
         } catch (err) {
-            setError("Failed to submit request.");
+            toast.error("Failed to submit request.");
         }
     };
 
@@ -74,8 +76,6 @@ export default function RequestAccess() {
                     placeholder="Reason for access"
                     className="p-2 border rounded"
                 />
-                {message && <p className="text-green-600">{message}</p>}
-                {error && <p className="text-red-600">{error}</p>}
                 <button className="bg-blue-600 text-white p-2 rounded">Submit</button>
             </form>
         </div>

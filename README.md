@@ -1,12 +1,143 @@
-# React + Vite
+# 🖥️ User Access Management Frontend
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+This is the **Frontend** for the User Access Management System, built using **React.js** and **Tailwind CSS**. It allows users to sign up, log in, request software access, and for admins/managers to manage requests.
 
-Currently, two official plugins are available:
+## 🚀 Features
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+- 🔐 **Authentication (Login/Signup)**
+- 🏠 **Role-based Dashboard**
+- 🧑‍💻 **Create Software (Admin only)**
+- 📥 **Request Software Access**
+- ✅ **Approve/Reject Requests (Admin/Manager)**
+- 🔄 **Global State with Context API**
+- 🌐 **API Integration with Axios**
+- 🎨 **Responsive UI with Tailwind CSS**
+- 🧭 **Client-side Routing (React Router DOM)**
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend using TypeScript with type-aware lint rules enabled. Check out the [TS template](https://github.com/vitejs/vite/tree/main/packages/create-vite/template-react-ts) for information on how to integrate TypeScript and [`typescript-eslint`](https://typescript-eslint.io) in your project.
+## 🛠️ Tech Stack
+
+- **React.js**
+- **Tailwind CSS**
+- **React Router**
+- **Axios**
+- **React Hot Toast**
+- **Context API**
+
+---
+
+## 📁 Project Structure
+
+# 🖥️ Software Access Management Frontend
+
+This is the **Frontend** for the Software Access Management System, built using **React.js** and **Tailwind CSS**. It allows users to sign up, log in, request software access, and for admins/managers to manage requests.
+
+## 🚀 Features
+
+- 🔐 **Authentication (Login/Signup)**
+- 🏠 **Role-based Dashboard**
+- 🧑‍💻 **Create Software (Admin only)**
+- 📥 **Request Software Access**
+- ✅ **Approve/Reject Requests (Admin/Manager)**
+- 🔄 **Global State with Context API**
+- 🌐 **API Integration with Axios**
+- 🎨 **Responsive UI with Tailwind CSS**
+- 🧭 **Client-side Routing (React Router DOM)**
+
+---
+
+## 🛠️ Tech Stack
+
+- **React.js**
+- **Tailwind CSS**
+- **React Router**
+- **Axios**
+- **React Hot Toast**
+- **Context API**
+
+---
+
+## 📁 Project Structure
+
+# 🖥️ Software Access Management Frontend
+
+This is the **Frontend** for the Software Access Management System, built using **React.js** and **Tailwind CSS**. It allows users to sign up, log in, request software access, and for admins/managers to manage requests.
+
+## 🚀 Features
+
+- 🔐 **Authentication (Login/Signup)**
+- 🏠 **Role-based Dashboard**
+- 🧑‍💻 **Create Software (Admin only)**
+- 📥 **Request Software Access**
+- ✅ **Approve/Reject Requests (Admin/Manager)**
+- 🔄 **Global State with Context API**
+- 🌐 **API Integration with Axios**
+- 🎨 **Responsive UI with Tailwind CSS**
+- 🧭 **Client-side Routing (React Router DOM)**
+
+---
+
+## 🛠️ Tech Stack
+
+- **React.js**
+- **Tailwind CSS**
+- **React Router**
+- **Axios**
+- **React Hot Toast**
+- **Context API**
+
+---
+
+## 📁 Project Structure
+
+src/
+├── api/ # Axios instance setup
+├── assets/ # Images & icons
+├── components/ # Reusable UI components
+├── context/ # Auth Context (Global State)
+├── pages/ # All routes/pages (Login, Signup, Home, etc.)
+├── utils/ # Utility functions like role-based redirects
+├── App.jsx # Main component with Routes
+└── main.jsx # Entry point
+
+---
+
+## 📦 Setup Instructions
+
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/vaibhav-chittora/User-Access-Management-System-Frontend.git
+
+cd user-access-frontend
+```
+
+### 2. Install dependencies
+
+`npm install`
+
+### 3. Set backend API URL (if needed)
+
+Update axiosInstance.js to match your backend URL:
+
+```bash
+ const axiosInstance = axios.create({
+  baseURL: "http://localhost:3000/api/v1", // Update with your backend URL
+});
+
+```
+
+### 4. Run the app
+
+`npm start`
+
+Open your browser at `http://localhost:5173`
+
+## 👥 Role Based Access Control
+
+| **Role**    | **Can Create Software** | **Can Request Access** | **Can Approve Requests** |
+| ----------- | ----------------------- | ---------------------- | ------------------------ |
+| **Admin**   | ✅ Yes                  | ✅ Yes                 | ✅ Yes                   |
+| **Manager** | ❌ No                   | ✅ Yes                 | ✅ Yes                   |
+| **User**    | ❌ No                   | ✅ Yes                 | ❌ No                    |
