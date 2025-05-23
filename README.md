@@ -2,6 +2,17 @@
 
 This is the **Frontend** for the User Access Management System, built using **React.js** and **Tailwind CSS**. It allows users to sign up, log in, request software access, and for admins/managers to manage requests.
 
+## Project Screenshots
+
+![Screenshot 1](./src/results/login.png)
+![Screenshot 2](./src/results/signup.png)
+![Screenshot 3](./src/results/Employee_homePage.png)
+![Screenshot 4](./src/results/requestAccess.png)
+![Screenshot 5](./src/results/admin_HomePage.png)
+![Screenshot 6](./src/results/createSoftware.png)
+![Screenshot 7](./src/results/manager_HomePage.png)
+![Screenshot 8](./src/results/pendingRequests.png)
+
 ## 🚀 Features
 
 - 🔐 **Authentication (Login/Signup)**
